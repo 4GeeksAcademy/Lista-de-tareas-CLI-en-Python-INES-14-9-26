@@ -16,7 +16,7 @@ perder el progreso.
 import csv
 import os
 
-TASKS_FILE = "todos.csv"
+TASKS_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "todos.csv")
 
 # Lista de tareas en memoria. Todas las funciones de este modulo la leen
 # y modifican directamente, en vez de recibirla como parametro.
@@ -81,6 +81,10 @@ def delete_task(number_to_delete):
     Devuelve True si se elimino correctamente, False si la posicion
     no era valida.
     """
+    if not isinstance(number_to_delete, int) or isinstance(number_to_delete, bool):
+        print("La posicion debe ser un numero entero.")
+        return False
+
     if not tasks:
         print("No hay tareas para eliminar.")
         return False
